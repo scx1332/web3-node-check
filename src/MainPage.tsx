@@ -2,8 +2,9 @@ import './MainPage.css';
 import configData from "./config.json";
 import { Routes, Route, Link } from "react-router-dom";
 import React from 'react';
-import Dashboard from "./Dashboard";
-import ClientDashboard from "./ClientDashboard";
+import CheckNode from "./CheckNode";
+
+
 
 function MainPage() {
 	return (
@@ -12,21 +13,12 @@ function MainPage() {
 				<div className="top-header-title">
 					Main page
 				</div>
-				<div className="top-header-navigation">
-					<Link to="/">Main page</Link>
-					<Link to="/dashboard">Dashboard</Link>
-					<Link to="/clients">Clients</Link>
-				</div>
 			</div>
 
 			<div className="main-content">
-				<Routes>
-					<Route element={<div>
-						<h1>Main page</h1>
-					</div>}></Route>
-					<Route path="dashboard" element={<Dashboard/>}></Route>
-					<Route path="clients" element={<ClientDashboard/>}></Route>
-				</Routes>
+				Test
+				<CheckNode />
+
 			</div>
 
 			<div>
