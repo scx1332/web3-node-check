@@ -27,6 +27,15 @@ class MultiRpcProvider {
         return data;
     }
 
+    async getBalance(address:string, blockNumber:number) : Promise<BigInt> {
+        let data = await this.singleCall({
+            method: "eth_getBalance",
+            params: [address, "0x" + blockNumber.toString(16)]
+        })
+        console.log(data);
+        return BigInt(data.result);
+    }
+
     async getBlockNumber() {
         //const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
         //await sleep(4000);
