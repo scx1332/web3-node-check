@@ -28,6 +28,8 @@ class MultiRpcProvider {
     }
 
     async getBlockNumber() {
+        //const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+        //await sleep(4000);
         let data = await this.singleCall({
             method: "eth_blockNumber",
             params: []

@@ -4,24 +4,36 @@ import MultiRpcProvider from "./MultiRpcProvider";
 
 
 function CheckNode() {
-    const [nodeUrl, setNodeUrl] = useState("https://bor.golem.network");
+    const [nodeUrl, setNodeUrl] = useState("http://localhost:8545/rpc/polygon/MAaCpE421MddDmzMLcAp");
     const [blockNumber, setBlockNumber] = useState(0);
     const [chainID, setChainID] = useState(0);
+    const [processing, setProcessing] = useState(false);
 
     useEffect( () => {
-        //constructor
+        console.log("Setting block number to " + 20);
         return () => {
             //destructor
+            console.log("Object destroyed");
         }
     }, []);
 
+    useEffect( () => {
+        console.log("Block number changed to: " + blockNumber);
+    }, [blockNumber]);
 
-
-    const checkNodeEvent = (val:string) => (event: React.MouseEvent<HTMLButtonElement>) => {
-        let m = new MultiRpcProvider(nodeUrl);
-        m.getChainID().then((chainId) => {setChainID(chainId)});
-        m.getBlockNumber().then((blockNumber) => {setBlockNumber(blockNumber)});
-        event.preventDefault();
+    const checkNodeEvent = (val:string) => async (event: React.MouseEvent<HTMLButtonElement>) => {
+        setProcessing(true);
+        try {
+            let m = new MultiRpcProvider(nodeUrl);
+            let chainIdPromise = m.getChainID();
+            let blockNumberPromise = m.getBlockNumber();
+            let chainId = await chainIdPromise;
+            setChainID(chainId);
+            let blockNumber = await blockNumberPromise;
+            setBlockNumber(blockNumber);
+        } finally {
+            setProcessing(false);
+        }
     };
 
     return (
@@ -36,10 +48,9 @@ function CheckNode() {
             <div>
                 Block number: {blockNumber}
             </div>
-            <button onClick={checkNodeEvent("t")}>Check endpoint</button>
+            <button disabled={processing} onClick={checkNodeEvent("argument")}>Check button 1</button>
         </div>
     );
-
 }
 
 export default CheckNode
