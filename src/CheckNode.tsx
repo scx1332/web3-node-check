@@ -3,8 +3,8 @@ import React, {useEffect, useState} from "react";
 import MultiRpcProvider from "./MultiRpcProvider";
 
 
-function CheckNode() {
-    const [nodeUrl, setNodeUrl] = useState("https://bor.golem.network");
+function CheckNode(props: any) {
+    const [nodeUrl, setNodeUrl] = useState(props.address);
     const [blockNumber, setBlockNumber] = useState(0);
     const [chainID, setChainID] = useState(0);
     const [processing, setProcessing] = useState(false);

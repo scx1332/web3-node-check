@@ -17,8 +17,15 @@ function MainPage() {
 
 			<div className="main-content">
 				Test
-				<CheckNode />
-
+				<div>
+					<CheckNode address="http://51.178.88.224:11333"/>
+				</div>
+				<div>
+					<CheckNode address="http://51.178.88.224/polygon"/>
+				</div>
+				<div>
+					<CheckNode address="https://bor.golem.network"/>
+				</div>
 			</div>
 
 			<div>
